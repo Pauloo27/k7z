@@ -13,5 +13,6 @@ type Project struct {
 }
 
 type Config struct {
+	Port     int        `yaml:"port"`
 	Projects []*Project `yaml:"projects"`
 }

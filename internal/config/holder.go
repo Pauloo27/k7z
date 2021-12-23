@@ -10,6 +10,7 @@ import (
 var (
 	config   *Config
 	Projects = make(map[string]*Project)
+	Port     int
 )
 
 func LoadConfig() error {
@@ -27,5 +28,6 @@ func LoadConfig() error {
 	for _, project := range config.Projects {
 		Projects[project.ID] = project
 	}
+	Port = config.Port
 	return nil
 }
