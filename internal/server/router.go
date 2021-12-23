@@ -2,6 +2,7 @@ package server
 
 import (
 	"github.com/Pauloo27/k7z/internal/config"
+	"github.com/Pauloo27/logger"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -14,10 +15,26 @@ func route(app *fiber.App) {
 
 	app.Post("/reload/:id", func(ctx *fiber.Ctx) error {
 		projectID := ctx.Params("id")
+		secret := ctx.Get("Secret")
+		if secret == "" {
+			return ctx.SendStatus(fiber.StatusUnauthorized)
+		}
+
 		project, found := config.Projects[projectID]
 		if !found {
-			return ctx.SendStatus(404)
+			return ctx.SendStatus(fiber.StatusNotFound)
 		}
-		return ctx.SendString("hello " + project.Name)
+		if secret != project.Secret {
+			return ctx.SendStatus(fiber.StatusForbidden)
+		}
+		go func() {
+			err := project.Reload()
+			if err != nil {
+				logger.Errorf("project %s (%s) failed to reload: %v", project.Name, project.ID, err)
+				return
+			}
+			logger.Successf("project %s (%s) successfully reloaded", project.Name, project.ID)
+		}()
+		return ctx.SendStatus(fiber.StatusOK)
 	})
 }
