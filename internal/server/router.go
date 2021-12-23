@@ -11,9 +11,11 @@ func route(app *fiber.App) {
 		return ctx.SendString("hello =)")
 	})
 
-	// TODO: route for reloading the config
+	app.Post("/admin/reload", func(ctx *fiber.Ctx) error {
+		return ctx.SendStatus(fiber.StatusTeapot)
+	})
 
-	app.Post("/reload/:id", func(ctx *fiber.Ctx) error {
+	app.Post("/projects/:id/reload", func(ctx *fiber.Ctx) error {
 		projectID := ctx.Params("id")
 		secret := ctx.Get("Secret")
 		if secret == "" {
