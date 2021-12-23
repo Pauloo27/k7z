@@ -19,4 +19,4 @@ tidy:
 # auto restart bot (using fiber CLI <3)
 .PHONY: dev
 dev:
-	fiber dev
+	fiber dev -t ./cmd/k7z/
