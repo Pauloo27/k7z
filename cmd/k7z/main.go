@@ -1,14 +1,16 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/Pauloo27/k7z/internal/config"
+	"github.com/Pauloo27/k7z/internal/server"
 )
 
 func main() {
-	fmt.Println("hello")
 	err := config.LoadConfig()
+	if err != nil {
+		panic(err)
+	}
+	err = server.StartHTTPServer()
 	if err != nil {
 		panic(err)
 	}
