@@ -11,8 +11,19 @@ func route(app *fiber.App) {
 		return ctx.SendString("hello =)")
 	})
 
-	app.Post("/admin/reload", func(ctx *fiber.Ctx) error {
-		return ctx.SendStatus(fiber.StatusTeapot)
+	app.Post("/admin/config/reload", func(ctx *fiber.Ctx) error {
+		secret := ctx.Get("Secret")
+		if secret == "" {
+			return ctx.SendStatus(fiber.StatusUnauthorized)
+		}
+		if secret != config.AdminSecret {
+			return ctx.SendStatus(fiber.StatusForbidden)
+		}
+		err := config.LoadConfig()
+		if err != nil {
+			return ctx.SendStatus(fiber.StatusInternalServerError)
+		}
+		return ctx.SendStatus(fiber.StatusOK)
 	})
 
 	app.Post("/projects/:id/reload", func(ctx *fiber.Ctx) error {
