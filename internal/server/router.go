@@ -12,7 +12,7 @@ func route(app *fiber.App) {
 	})
 
 	app.Post("/admin/config/reload", func(ctx *fiber.Ctx) error {
-		secret := ctx.Get("Secret")
+		secret := ctx.Get("Authorization")
 		if secret == "" {
 			return ctx.SendStatus(fiber.StatusUnauthorized)
 		}
@@ -28,7 +28,7 @@ func route(app *fiber.App) {
 
 	app.Post("/projects/:id/reload", func(ctx *fiber.Ctx) error {
 		projectID := ctx.Params("id")
-		secret := ctx.Get("Secret")
+		secret := ctx.Get("Authorization")
 		if secret == "" {
 			return ctx.SendStatus(fiber.StatusUnauthorized)
 		}
