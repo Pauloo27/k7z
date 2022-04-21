@@ -1,5 +1,7 @@
 github.com/Pauloo27/logger v0.0.0-20211021033456-da9262f8be0f h1:aMmlzeEZForBN4R5qrtCyGpYqnfAIUscWlDy3nc1aAY=
 github.com/Pauloo27/logger v0.0.0-20211021033456-da9262f8be0f/go.mod h1:pr6tiuqHGzDinqApqqLO7CjzoUXkTM/yq1Pj78Z089Q=
+github.com/Pauloo27/logger v0.0.0-20220320171458-4991d8b58895 h1:M+A6e1KWtWb4FtSTEqX8npevymG7qDhxDkdGD4uu+pc=
+github.com/Pauloo27/logger v0.0.0-20220320171458-4991d8b58895/go.mod h1:pr6tiuqHGzDinqApqqLO7CjzoUXkTM/yq1Pj78Z089Q=
 github.com/andybalholm/brotli v1.0.2 h1:JKnhI/XQ75uFBTiuzXpzFrUriDPiZjlOSzh6wXogP0E=
 github.com/andybalholm/brotli v1.0.2/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=

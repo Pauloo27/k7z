@@ -3,7 +3,7 @@ module github.com/Pauloo27/k7z
 go 1.17
 
 require (
-	github.com/Pauloo27/logger v0.0.0-20211021033456-da9262f8be0f
+	github.com/Pauloo27/logger v0.0.0-20220320171458-4991d8b58895
 	github.com/gofiber/fiber/v2 v2.23.0
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 )
