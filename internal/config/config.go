@@ -6,10 +6,11 @@ type Command struct {
 }
 
 type Project struct {
-	Name     string     `yaml:"name"`
-	ID       string     `yaml:"id"`
-	Secret   string     `yaml:"secret"`
-	Commands []*Command `yaml:"commands"`
+	Name         string     `yaml:"name"`
+	ID           string     `yaml:"id"`
+	Secret       string     `yaml:"secret"`
+	SecretHeader string     `yaml:"secret_header"`
+	Commands     []*Command `yaml:"commands"`
 }
 
 type Config struct {

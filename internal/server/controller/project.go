@@ -8,21 +8,31 @@ import (
 
 func ReloadProject(ctx *fiber.Ctx) error {
 	projectID := ctx.Params("id")
-	secret := ctx.Get("Authorization")
+
+	project, found := config.Projects[projectID]
+	// if not found stuff is done only after the auth is checked to avoid leaking
+	// information about the existence of projects.
+
+	secretHeader := project.SecretHeader
+	if secretHeader == "" {
+		secretHeader = "Authorization"
+	}
+
+	secret := ctx.Get(secretHeader)
+
 	if secret == "" {
 		logger.Info("Got a request missing authorization header")
 		return ctx.SendStatus(fiber.StatusUnauthorized)
 	}
 
-	project, found := config.Projects[projectID]
-	if !found {
-		logger.Info("Cannot found project with ID", projectID)
-		return ctx.SendStatus(fiber.StatusNotFound)
-	}
-
 	if secret != project.Secret {
 		logger.Info("Got a request with an invalid secret")
 		return ctx.SendStatus(fiber.StatusForbidden)
+	}
+
+	if !found {
+		logger.Info("Cannot found project with ID", projectID)
+		return ctx.SendStatus(fiber.StatusNotFound)
 	}
 
 	go func() {
